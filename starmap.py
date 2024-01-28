@@ -86,7 +86,7 @@ class StarMap(DataStarMap):
         text = f'''
         Local de Observação: {location}, {str(round(self.lat, 2))}, {str(round(self.long, 2))}
         Data e Hora: {when_datetime.strftime('%d de %B de %Y às %H:%M')}
-        Magnitude Lim. {str(self.limiting_magnitude)}
+        Magnitude Limite: {str(self.limiting_magnitude)}
         '''
 
         plt.figtext(0.5, 0, text, horizontalalignment = 'center', color = font_color, fontsize = 10)
