@@ -95,7 +95,7 @@ class StarMap(DataStarMap):
 
 if __name__ == '__main__':
 
-    generator = StarMap(when = '2004-01-23 22:29', limit_magnitude = 10) # lat = -3.219105, long = -45.000949,
+    generator = StarMap(when = '2024-01-23 22:29', limit_magnitude = 10) # lat = -3.219105, long = -45.000949,
 
     generator.star_map(
         location = 'São Luís, Maranhão, Brasil', chart_size = 10, max_star_size = 100 # , show = True, daylight = True
