@@ -4,6 +4,7 @@ from data import DataStarMap
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from matplotlib.collections import LineCollection
+from matplotlib.patches import Circle
 
 from datetime import datetime
 from os import listdir, mkdir
@@ -28,7 +29,7 @@ class StarMap(DataStarMap):
         self.stars, self.edges_star1, self.edges_star2 = self.collect_celestial_data(when = when, lat = lat, long = long)
         self.limiting_magnitude = limit_magnitude
 
-    def star_map(self, location: str, chart_size: int, max_star_size: int, show: bool = False, daylight: bool = False):
+    def star_map(self, location: str, chart_size: int, max_star_size: int, show: bool = False, daylight: bool = False, circle: bool = True):
 
         if daylight:
             fc = 'white'
@@ -67,8 +68,18 @@ class StarMap(DataStarMap):
             zorder = 2
         )
 
+        if circle:
+
+            border = plt.Circle((0, 0), 1, color = fc, fill = True)
+            ax.add_patch(border)
+
+            horizon = Circle((0, 0), radius = 1, transform = ax.transData)
+            for col in ax.collections:
+                col.set_clip_path(horizon)
+        else:
+            ax.set_aspect('equal')
+
         # Finally, add other settings
-        ax.set_aspect('equal')
         ax.set_xlim(-1, 1)
         ax.set_ylim(-1, 1)
         plt.axis('off')
@@ -95,8 +106,8 @@ class StarMap(DataStarMap):
 
 if __name__ == '__main__':
 
-    generator = StarMap(when = '2024-01-23 22:29', limit_magnitude = 10) # lat = -3.219105, long = -45.000949,
+    generator = StarMap(when = '2024-01-23 10:29', lat = 35.680715, long = 139.767349, limit_magnitude = 10) # lat = -3.219105, long = -45.000949,
 
     generator.star_map(
-        location = 'São Luís, Maranhão, Brasil', chart_size = 10, max_star_size = 100 # , show = True, daylight = True
+        location = 'Tóquio, Japão', chart_size = 10, max_star_size = 100, daylight = True
     )

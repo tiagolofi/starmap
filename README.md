@@ -49,9 +49,9 @@ generator.star_map(
 
 ## Results
 
-![](images/São%20Luís%2C%20Maranhão%2C%20Brasil_20240127_2100.png)
+![](images/São%20Luís,%20Maranhão,%20Brasil_20240123_2229.png.png)
 
-![](images/Tóquio,%20Japão_20240127_0900.png)
+![](images/Tóquio,%20Japão_20240123_1029.png.png)
 
 ## To-Do
 
