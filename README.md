@@ -38,7 +38,7 @@ generator.star_map(
 
 ## Results
 
-![]('images/São Luís, Maranhão, Brasil_20240127_2100.png')
+![](images/São%20Luís%2C%20Maranhão%2C%20Brasil_20240127_2100.png)
 
 ## To-Do
 
