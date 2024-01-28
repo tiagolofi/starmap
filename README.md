@@ -38,9 +38,9 @@ generator.star_map(
 
 ## Results
 
-![](images/São Luís, Maranhão, Brasil_20240127_2100.png)
+![]('images/São Luís, Maranhão, Brasil_20240127_2100.png')
 
 ## To-Do
 
-- [] Download Images Bytes
-- [] WebApp (aguardar nova versão do tzwhere)
+- [ ] Download Images Bytes
+- [ ] WebApp (aguardar nova versão do tzwhere)
