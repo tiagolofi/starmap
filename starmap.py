@@ -32,7 +32,7 @@ class StarMap(DataStarMap):
     def star_map(self, location: str, chart_size: int, max_star_size: int, show: bool = False, daylight: bool = False, circle: bool = True):
 
         if daylight:
-            fc = 'white'
+            fc = '#FFF3E7'
             star_color = 'black'
             col_lines = 'black'
             font_color = 'black'
