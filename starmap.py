@@ -13,11 +13,11 @@ locale.setlocale(locale.LC_TIME, 'pt_BR')
 
 class StarMap(DataStarMap):
 
-    def __init__(self, when, lat: float = -2.5116631, long: float = -44.3072184):
+    def __init__(self, when, lat: float = -2.5116631, long: float = -44.3072184, limit_magnitude: int = 10):
         super().__init__()
         self.when = when
         self.stars, self.edges_star1, self.edges_star2 = self.collect_celestial_data(when = when, lat = lat, long = long)
-        self.limiting_magnitude = 10
+        self.limiting_magnitude = limit_magnitude
 
     def star_map(self, location: str, chart_size: int, max_star_size: int, show: bool = False, daylight: bool = False):
 
@@ -64,7 +64,7 @@ class StarMap(DataStarMap):
         ax.set_ylim(-1, 1)
         plt.axis('off')
         when_datetime = datetime.strptime(self.when, '%Y-%m-%d %H:%M')
-        plt.title(f"Local de Observação: {location}\nData e Hora: {when_datetime.strftime('%d de %B de %Y às %H:%M')}", loc='right', color = font_color, fontsize=10)
+        plt.title(f"Local de Observação: {location}\nData e Hora: {when_datetime.strftime('%d de %B de %Y às %H:%M')}\nMagnitude Lim. {str(self.limiting_magnitude)}", loc='right', color = font_color, fontsize=10)
         filename = f"images/{location}_{when_datetime.strftime('%Y%m%d_%H%M')}.png"
         
         if 'images' not in listdir():
@@ -80,8 +80,8 @@ class StarMap(DataStarMap):
 
 if __name__ == '__main__':
 
-    generator = StarMap(when = '2024-01-27 09:00', lat = 35.5074466, long = 139.1104488)
+    generator = StarMap(when = '2024-01-27 09:00', lat = 35.5074466, long = 139.1104488, limit_magnitude = 6)
 
     generator.star_map(
-        location = 'Tokyo, Japão', chart_size = 10, max_star_size = 150, show = True, daylight = True
+        location = 'Tóquio, Japão', chart_size = 10, max_star_size = 50, show = False, daylight = True
     )
