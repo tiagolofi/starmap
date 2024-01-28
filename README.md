@@ -43,4 +43,4 @@ generator.star_map(
 ## To-Do
 
 - [] Download Images Bytes
-- [] WebApp
+- [] WebApp (aguardar nova versão do tzwhere)
