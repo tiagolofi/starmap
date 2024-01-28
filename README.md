@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 Para a versão do package [tzwhere](https://github.com/pegler/pytzwhere), submeti a pull request [#64](https://github.com/pegler/pytzwhere/pull/64). Pois há um bug na construção do array do numpy no método construtor principal, a solução deixei a seguir, se o problema persistir:
 
-```{python}
+```python
     for tzname, poly in pgen:
             self.timezoneNamesToPolygons[tzname].append(poly)
         for tzname, polys in self.timezoneNamesToPolygons.items():
@@ -24,7 +24,7 @@ Para a versão do package [tzwhere](https://github.com/pegler/pytzwhere), submet
 
 ## How to Use
 
-```{python}
+```python
 from starmap import StarMap
 
 generator = StarMap(when = '2024-01-27 21:00')
