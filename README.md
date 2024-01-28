@@ -34,10 +34,15 @@ generator.star_map(
     chart_size = 10, max_star_size = 150, show = True
 )
 
-generator = StarMap(when = '2024-01-27 09:00', lat = 35.5074466, long = 139.1104488) # setando em Tóquio, Japão às 9 horas da manhã
+generator = StarMap(
+    when = '2024-01-27 09:00', 
+    lat = 35.5074466, long = 139.1104488
+) # setando em Tóquio, Japão às 9 horas da manhã
 
 generator.star_map(
-    location = 'Tóquio, Japão', chart_size = 10, max_star_size = 150, show = True, daylight = True # configurando o modo para luz do dia
+    location = 'Tóquio, Japão', 
+    chart_size = 10, max_star_size = 150, 
+    show = True, daylight = True # configurando o modo para luz do dia
 )
 
 ```
