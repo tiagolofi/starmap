@@ -69,7 +69,6 @@ class StarMap(DataStarMap):
         )
 
         if circle:
-
             border = plt.Circle((0, 0), 1, color = fc, fill = True)
             ax.add_patch(border)
 
