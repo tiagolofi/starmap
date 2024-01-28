@@ -19,7 +19,18 @@ class StarMap(DataStarMap):
         self.stars, self.edges_star1, self.edges_star2 = self.collect_celestial_data(when = when, lat = lat, long = long)
         self.limiting_magnitude = 10
 
-    def star_map(self, location: str, chart_size: int, max_star_size: int, show: bool = False):
+    def star_map(self, location: str, chart_size: int, max_star_size: int, show: bool = False, daylight: bool = False):
+
+        if daylight:
+            fc = 'white'
+            star_color = 'black'
+            col_lines = 'black'
+            font_color = 'black'
+        else:
+            fc = '#041A40'
+            star_color = 'white'
+            col_lines = 'white'
+            font_color = 'white'
 
         # Define the number of stars and brightness of stars to include
         
@@ -33,17 +44,17 @@ class StarMap(DataStarMap):
         lines_xy = np.rollaxis(np.array([xy1, xy2]), 1)
 
         # Time to build the figure!
-        fig, ax = plt.subplots(figsize = (chart_size, chart_size), facecolor = '#041A40')
+        fig, ax = plt.subplots(figsize = (chart_size, chart_size), facecolor = fc)
 
         # Draw the constellation lines.
         ax.add_collection(
-            LineCollection(lines_xy, colors = '#ffff', linewidths = 0.15)
+            LineCollection(lines_xy, colors = col_lines, linewidths = 0.15)
         )
 
         # Draw the stars.
         ax.scatter(
             self.stars['x'][bright_stars], self.stars['y'][bright_stars],
-            s = marker_size, color = 'white', marker = '.', linewidths = 0,
+            s = marker_size, color = star_color, marker = '.', linewidths = 0,
             zorder = 2
         )
 
@@ -53,7 +64,7 @@ class StarMap(DataStarMap):
         ax.set_ylim(-1, 1)
         plt.axis('off')
         when_datetime = datetime.strptime(self.when, '%Y-%m-%d %H:%M')
-        plt.title(f"Local de Observação: {location}\nData e Hora: {when_datetime.strftime('%d de %B de %Y às %H:%M')}", loc='right',color = 'white', fontsize=10)
+        plt.title(f"Local de Observação: {location}\nData e Hora: {when_datetime.strftime('%d de %B de %Y às %H:%M')}", loc='right', color = font_color, fontsize=10)
         filename = f"images/{location}_{when_datetime.strftime('%Y%m%d_%H%M')}.png"
         
         if 'images' not in listdir():
@@ -69,8 +80,8 @@ class StarMap(DataStarMap):
 
 if __name__ == '__main__':
 
-    generator = StarMap(when = '2024-01-27 21:00')
+    generator = StarMap(when = '2024-01-27 09:00', lat = 35.5074466, long = 139.1104488)
 
     generator.star_map(
-        location = 'São Luís, Maranhão, Brasil', chart_size = 10, max_star_size = 150, show = True
+        location = 'Tokyo, Japão', chart_size = 10, max_star_size = 150, show = True, daylight = True
     )
