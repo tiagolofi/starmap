@@ -8,7 +8,7 @@ from skyfield.data import hipparcos, stellarium
 from skyfield.projections import build_stereographic_projection
 from skyfield.constants import GM_SUN_Pitjeva_2005_km3_s2 as GM_SUN
 
-from utils import mod_load_dataframe
+from utils.mod_hipparcos import mod_load_dataframe
 from os import listdir
 
 class DataStarMap(object):

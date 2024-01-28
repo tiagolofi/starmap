@@ -2,6 +2,7 @@
 from data import DataStarMap
 
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 from matplotlib.collections import LineCollection
 
 from datetime import datetime
@@ -11,11 +12,19 @@ import locale
 
 locale.setlocale(locale.LC_TIME, 'pt_BR')
 
+font_path = 'utils/montserrat.ttf'
+font_e = fm.FontEntry(font_path, 'montserrat')
+fm.fontManager.ttflist.insert(0, font_e)
+
+plt.rcParams['font.family'] = font_e.name
+
 class StarMap(DataStarMap):
 
     def __init__(self, when, lat: float = -2.5116631, long: float = -44.3072184, limit_magnitude: int = 10):
         super().__init__()
         self.when = when
+        self.lat = lat
+        self.long = long
         self.stars, self.edges_star1, self.edges_star2 = self.collect_celestial_data(when = when, lat = lat, long = long)
         self.limiting_magnitude = limit_magnitude
 
@@ -27,7 +36,7 @@ class StarMap(DataStarMap):
             col_lines = 'black'
             font_color = 'black'
         else:
-            fc = '#041A40'
+            fc = 'black' # '#041A40'
             star_color = 'white'
             col_lines = 'white'
             font_color = 'white'
@@ -64,7 +73,13 @@ class StarMap(DataStarMap):
         ax.set_ylim(-1, 1)
         plt.axis('off')
         when_datetime = datetime.strptime(self.when, '%Y-%m-%d %H:%M')
-        plt.title(f"Local de Observação: {location}\nData e Hora: {when_datetime.strftime('%d de %B de %Y às %H:%M')}\nMagnitude Lim. {str(self.limiting_magnitude)}", loc='right', color = font_color, fontsize=10)
+        text = f'''
+        Local de Observação: {location}, {str(round(self.lat, 2))}, {str(round(self.long, 2))}
+        Data e Hora: {when_datetime.strftime('%d de %B de %Y às %H:%M')}
+        Magnitude Lim. {str(self.limiting_magnitude)}
+        '''
+
+        plt.figtext(0.5, 0, text, horizontalalignment = 'center', color = font_color, fontsize = 10)
         filename = f"images/{location}_{when_datetime.strftime('%Y%m%d_%H%M')}.png"
         
         if 'images' not in listdir():
@@ -80,8 +95,8 @@ class StarMap(DataStarMap):
 
 if __name__ == '__main__':
 
-    generator = StarMap(when = '2024-01-27 09:00', lat = 35.5074466, long = 139.1104488, limit_magnitude = 6)
+    generator = StarMap(when = '2004-01-23 22:29', limit_magnitude = 10) # lat = -3.219105, long = -45.000949,
 
     generator.star_map(
-        location = 'Tóquio, Japão', chart_size = 10, max_star_size = 50, show = False, daylight = True
+        location = 'São Luís, Maranhão, Brasil', chart_size = 10, max_star_size = 100 # , show = True, daylight = True
     )
