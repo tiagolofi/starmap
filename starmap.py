@@ -28,19 +28,18 @@ class StarMap(DataStarMap):
         self.long = long
         self.stars, self.edges_star1, self.edges_star2 = self.collect_celestial_data(when = when, lat = lat, long = long)
         self.limiting_magnitude = limit_magnitude
+        self.theming_default = {
+            'background-color': '#000000',
+            'sky-color': '#0A0A0A',
+            'star-color': '#C2B59B',
+            'line-color': '#C2B59B',
+            'font-color': '#C2B59B'
+        }
 
-    def star_map(self, location: str, chart_size: int, max_star_size: int, show: bool = False, daylight: bool = False, circle: bool = True):
+    def star_map(self, location: str, chart_size: int, max_star_size: int, show: bool = False, theming: dict = None, circle: bool = True):
 
-        if daylight:
-            fc = '#FFF3E7'
-            star_color = 'black'
-            col_lines = 'black'
-            font_color = 'black'
-        else:
-            fc = 'black' # '#041A40'
-            star_color = 'white'
-            col_lines = 'white'
-            font_color = 'white'
+        if theming is None:
+            theming = self.theming_default
 
         # Define the number of stars and brightness of stars to include
         
@@ -54,22 +53,22 @@ class StarMap(DataStarMap):
         lines_xy = np.rollaxis(np.array([xy1, xy2]), 1)
 
         # Time to build the figure!
-        fig, ax = plt.subplots(figsize = (chart_size, chart_size), facecolor = fc)
+        fig, ax = plt.subplots(figsize = (chart_size, chart_size), facecolor = theming['background-color'])
 
         # Draw the constellation lines.
         ax.add_collection(
-            LineCollection(lines_xy, colors = col_lines, linewidths = 0.15)
+            LineCollection(lines_xy, colors = theming['line-color'], linewidths = 0.15)
         )
 
         # Draw the stars.
         ax.scatter(
             self.stars['x'][bright_stars], self.stars['y'][bright_stars],
-            s = marker_size, color = star_color, marker = '.', linewidths = 0,
+            s = marker_size, color = theming['star-color'], marker = '.', linewidths = 0,
             zorder = 2
         )
 
         if circle:
-            border = plt.Circle((0, 0), 1, color = fc, fill = True)
+            border = plt.Circle((0, 0), 1, color = theming['sky-color'], fill = True)
             ax.add_patch(border)
 
             horizon = Circle((0, 0), radius = 1, transform = ax.transData)
@@ -89,7 +88,7 @@ class StarMap(DataStarMap):
         Magnitude Limite: {str(self.limiting_magnitude)}
         '''
 
-        plt.figtext(0.5, 0, text, horizontalalignment = 'center', color = font_color, fontsize = 10)
+        plt.figtext(0.5, 0, text, horizontalalignment = 'center', color = theming['font-color'], fontsize = 10)
         filename = f"images/{location}_{when_datetime.strftime('%Y%m%d_%H%M')}.png"
         
         if 'images' not in listdir():
@@ -105,8 +104,8 @@ class StarMap(DataStarMap):
 
 if __name__ == '__main__':
 
-    generator = StarMap(when = '2024-01-23 10:29', lat = 35.680715, long = 139.767349, limit_magnitude = 10) # lat = -3.219105, long = -45.000949,
+    generator = StarMap(when = '1999-07-31 05:30', lat = -3.219122, long = -45.000965, limit_magnitude = 10) # lat = -3.219105, long = -45.000949,
 
     generator.star_map(
-        location = 'Tóquio, Japão', chart_size = 10, max_star_size = 100, daylight = True
+        location = 'Viana, Maranhão, Brasil', chart_size = 10, max_star_size = 100
     )

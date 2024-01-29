@@ -24,27 +24,40 @@ Para a versão do package [tzwhere](https://github.com/pegler/pytzwhere), submet
 
 ## How to Use
 
+#### Basic Usage
+
 ```python
 from starmap import StarMap
 
-generator = StarMap(when = '2024-01-27 21:00') # setado em São Luís, por padrão
+generator = StarMap(when = '2024-01-23 22:29') # setado em São Luís, por padrão
 
 generator.star_map(
     location = 'São Luís, Maranhão, Brasil', 
-    chart_size = 10, max_star_size = 150, show = True
+    chart_size = 10, max_star_size = 100, show = True
 )
+```
 
+#### Set Location and Theming
+
+```python
 generator = StarMap(
-    when = '2024-01-27 09:00', 
+    when = '2024-01-23 10:29',
     lat = 35.5074466, long = 139.1104488
 ) # setando em Tóquio, Japão às 9 horas da manhã
+
+tema = {
+    'background-color': '#090421',
+    'sky-color': '#C2FFFE',
+    'star-color': '#090421',
+    'line-color': '#090421',
+    'font-color': '#C2FFFE'
+}
 
 generator.star_map(
     location = 'Tóquio, Japão', 
     chart_size = 10, max_star_size = 150, 
-    show = True, daylight = True # configurando o modo para luz do dia
+    show = False, theming = tema # configurando o modo para luz do dia
 )
-
 ```
 
 ## Results
