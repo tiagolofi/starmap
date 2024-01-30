@@ -47,6 +47,7 @@ class DataStarMap(object):
 
         # Define datetime and convert to UTC based on location coordinates
         timezone_str = tzwhere.tzwhere().tzNameAt(lat, long)
+        print(timezone_str)
         local = timezone(timezone_str)
         utc_dt = local.localize(dt, is_dst=None).astimezone(utc)
 
@@ -64,7 +65,7 @@ class DataStarMap(object):
 
 
         # Define the angle and center the observation location by the angle - position
-        observer.from_altaz(alt_degrees=90, az_degrees=0)
+        # observer.from_altaz(alt_degrees=90, az_degrees=0)
         ra, dec, distance = observer.radec()
         center_object = Star(ra = ra, dec = dec)
 
