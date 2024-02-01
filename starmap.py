@@ -21,7 +21,7 @@ plt.rcParams['font.family'] = font_e.name
 
 class StarMap(DataStarMap):
 
-    def __init__(self, when, lat: float = -2.523628, long: float = -44.298401, limit_magnitude: int = 10):
+    def __init__(self, when, lat: float = -2.52365034042146, long: float = -44.2983925478011, limit_magnitude: int = 10):
         super().__init__()
         self.when = when
         self.lat = lat
@@ -110,15 +110,15 @@ if __name__ == '__main__':
         location = 'São Luís, Maranhão, Brasil', chart_size = 10, max_star_size = 50
     )
 
-    generator = StarMap(when = '2024-01-23 10:29', lat = 35.681375, long = 139.767103, limit_magnitude = 15) 
-
-    generator.star_map(
-        location = 'Estação de Tóquio, Japão', chart_size = 10, max_star_size = 50,
-        theming = {
-            'background-color': '#001f54',
-            'sky-color': '#034078',
-            'star-color': '#fefcfb',
-            'line-color': '#fefcfb',
-            'font-color': '#fefcfb'
-        }
-    )
+    # generator = StarMap(when = '2024-01-23 10:29', lat = 35.681375, long = 139.767103, limit_magnitude = 15) 
+# 
+    # generator.star_map(
+    #     location = 'Estação de Tóquio, Japão', chart_size = 10, max_star_size = 50,
+    #     theming = {
+    #         'background-color': '#001f54',
+    #         'sky-color': '#034078',
+    #         'star-color': '#fefcfb',
+    #         'line-color': '#fefcfb',
+    #         'font-color': '#fefcfb'
+    #     }
+    # )

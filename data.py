@@ -46,8 +46,9 @@ class DataStarMap(object):
         dt = datetime.strptime(when, '%Y-%m-%d %H:%M')
 
         # Define datetime and convert to UTC based on location coordinates
-        timezone_str = tzwhere.tzwhere().tzNameAt(lat, long)
-        print(timezone_str)
+        tz = tzwhere.tzwhere(forceTZ = True)
+        timezone_str = tz.tzNameAt(lat, long, forceTZ = True)
+        
         local = timezone(timezone_str)
         utc_dt = local.localize(dt, is_dst=None).astimezone(utc)
 
